@@ -52,3 +52,10 @@ export const logInWithEmailAndPassword = async (email, password) => {
 export const logout = () => {
   signOut(auth);
 };
+
+export const submitReport = async (report) => {
+  const team = 'team-' + report['info.team'];
+  const match = 'match-' + report['info.match'];
+  await setDoc(doc(db, match, team), report);
+  await setDoc(doc(db, team, match), report);
+}
