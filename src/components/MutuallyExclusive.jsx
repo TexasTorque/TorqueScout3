@@ -14,7 +14,7 @@ import { default as Null } from "./Null";
 import { default as Group } from "./Group";
 import { default as Toggle } from "./Toggle";
 
-const Exclusive = ({ elements, callback }) => {
+const MutuallyExclusive = ({ elements, callback }) => {
   const [selected, setSelected] = useState(elements[0]);
 
   const update = (element) => {
@@ -25,7 +25,7 @@ const Exclusive = ({ elements, callback }) => {
   return (
     <div>
       {elements.map((name, i) => (
-        <div className="exclusive">
+        <div className="MutuallyExclusive">
           <div className="row mt-4 mr-3">
             <h4 className="name-field ml-3 mt-2" style={{ width: "8rem" }}>
               {name || <Null />}
@@ -47,4 +47,4 @@ const Exclusive = ({ elements, callback }) => {
   );
 };
 
-export default Exclusive;
+export default MutuallyExclusive;

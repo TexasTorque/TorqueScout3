@@ -10,21 +10,18 @@ import Col from "react-bootstrap/Col";
 
 import { default as Null } from "./Null";
 
-const Click = ({ name, callback, variant }) => {
+const ButtonFull = ({ name, callback, variant }) => {
   return (
     <div className="click">
-      <div className="row mt-4 mr-3">
-        <h4 className="name-field ml-3 mt-2" style={{ width: "8rem" }}>
-          {name || <Null />}
-        </h4>
-        <div className="ml-0 mt-1" style={{ width: "10rem" }}>
+      <div className="row mt-4 mr-0 mb-0">
+        <div className="ml-3 mt-0" style={{ width: "18rem" }}>
           <Button
             className="w-100"
             variant={variant ?? "primary"}
             size="md"
             onClick={() => callback()}
           >
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {name || <Null />}
           </Button>
         </div>
       </div>
@@ -32,4 +29,4 @@ const Click = ({ name, callback, variant }) => {
   );
 };
 
-export default Click;
+export default ButtonFull;

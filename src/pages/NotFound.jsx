@@ -6,10 +6,10 @@ import { default as Loader } from "../components/Loader";
 import { default as Numeric } from "../components/Numeric";
 import { default as Group } from "../components/Group";
 import { default as Toggle } from "../components/Toggle";
-import { default as Field } from "../components/Field";
-import { default as Exclusive } from "../components/Exclusive";
-import { default as Click } from "../components/Click";
-import { default as Click2 } from "../components/Click2";
+import { default as TextField } from "../components/TextField";
+import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
+import { default as ButtonHalf } from "../components/ButtonHalf";
+import { default as ButtonFull } from "../components/ButtonFull";
 
 const NotFound = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const NotFound = () => {
     <div className="home">
       <div className="container mt-4">
         <Group name="Page Not Found">
-          <Click2 name="Back to home" callback={() => navigate('/')} />
+          <ButtonFull name="Back to home" callback={() => navigate('/')} />
         </Group>
       </div>
     </div>

@@ -9,10 +9,10 @@ import { default as Loader } from "../components/Loader";
 import { default as Numeric } from "../components/Numeric";
 import { default as Group } from "../components/Group";
 import { default as Toggle } from "../components/Toggle";
-import { default as Field } from "../components/Field";
-import { default as Exclusive } from "../components/Exclusive";
-import { default as Click } from "../components/Click";
-import { default as Click2 } from "../components/Click2";
+import { default as TextField } from "../components/TextField";
+import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
+import { default as ButtonHalf } from "../components/ButtonHalf";
+import { default as ButtonFull } from "../components/ButtonFull";
 
 const Scout = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -73,13 +73,13 @@ const Scout = () => {
     <div className="scout">
       <div className="container mt-4">
         <Group name="Scouting">
-          <Field name="Scouter" callback={_ => _} readonly={username} />
-          <Click2 name="Logout" callback={() => logout()} />
-          <Click2 name="Submit" callback={() => submit()} />
+          <TextField name="Scouter" callback={_ => _} readonly={username} />
+          <ButtonFull name="Logout" callback={() => logout()} />
+          <ButtonFull name="Submit" callback={() => submit()} />
         </Group>
         <Group name="Info">
-          <Field name="Match" callback={hook("info.match", null)} />
-          <Field name="Team" callback={hook("info.team", null)} />
+          <TextField name="Match" callback={hook("info.match", null)} />
+          <TextField name="Team" callback={hook("info.team", null)} />
           <Toggle
             name="Alliance"
             on="primary"
@@ -104,7 +104,7 @@ const Scout = () => {
             min={0}
             callback={hook("climb.time")}
           />
-          <Exclusive
+          <MutuallyExclusive
             elements={["None", "Low", "Mid", "High", "Traverse"]}
             callback={hook("climb.level", "None")}
           />

@@ -11,7 +11,7 @@ import Form from "react-bootstrap/Form";
 
 import { default as Null } from "./Null";
 
-const Field = ({ name, callback, placeholder, readonly, type }) => {
+const TextField = ({ name, callback, placeholder, readonly, type }) => {
   return (
     <div className="numeric">
       <div className="row mt-4 mr-3">
@@ -32,4 +32,4 @@ const Field = ({ name, callback, placeholder, readonly, type }) => {
   );
 };
 
-export default Field;
+export default TextField;
