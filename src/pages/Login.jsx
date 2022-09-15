@@ -15,16 +15,17 @@ const Login = () => {
     if (loading) {
       return <Loader />;
     }
-    if (user) navigate("/dashboard");
+    if (user) navigate("/scout");
   }, [user, loading]);
 
   return (
     <div>
       <div className="login">
         <div className="login__container">
-          <h2>Login<br></br></h2>
-          <br>
-          </br>
+          <h2>
+            Login<br></br>
+          </h2>
+          <br></br>
           <input
             type="text"
             className="login__textBox"
@@ -55,9 +56,9 @@ const Login = () => {
             Don't have an account? <Link to="/register">Register</Link> now.
           </div> */}
         </div>
-      </div> 
+      </div>
     </div>
   );
-}
+};
 
 export default Login;

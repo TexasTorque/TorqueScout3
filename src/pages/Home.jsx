@@ -1,7 +1,7 @@
 import React from "react";
 
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 const Home = () => {
   return (
@@ -15,15 +15,19 @@ const Home = () => {
         </div>
         <div className="row">
           <div className="ml-4">
-            <Button variant="primary" size="lg" href="/scout" varient="warning">Scout</Button>
+            <Button variant="primary" size="lg" href="/scout" varient="warning">
+              Scout
+            </Button>
           </div>
           <div className="ml-4">
-            <Button variant="primary" size="lg" href="#" varient="warning">Analysis</Button>
+            <Button variant="primary" size="lg" href="#" varient="warning">
+              Analysis
+            </Button>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Home;

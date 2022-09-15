@@ -1,23 +1,23 @@
 /* Fonts */
 @font-face {
   font-family: "SFPro";
-  src: url('fonts/SFPro/SF-Pro-Text-Regular.otf');
+  src: url("fonts/SFPro/SF-Pro-Text-Regular.otf");
 }
 @font-face {
   font-family: "SFCompact";
-  src: url('fonts/SFCompact/SF-Compact.ttf');
+  src: url("fonts/SFCompact/SF-Compact.ttf");
 }
 @font-face {
   font-family: "NY";
-  src: url('fonts/NewYork/NewYork.ttf');
+  src: url("fonts/NewYork/NewYork.ttf");
 }
 @font-face {
   font-family: "SFMono";
-  src: url('fonts/SFMono/SF-Mono.ttf');
+  src: url("fonts/SFMono/SF-Mono.ttf");
 }
 @font-face {
   font-family: "MarketDeco";
-  src: url('fonts/market_deco/Market_Deco.ttf');
+  src: url("fonts/market_deco/Market_Deco.ttf");
 }
 /* 
 .loader_circle {
@@ -75,8 +75,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 code {
-  font-family: "SFMono", Menlo, Monaco, Consolas, "Courier New",
-  monospace;
+  font-family: "SFMono", Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 a {
   text-decoration: none;
@@ -84,12 +83,15 @@ a {
 a:hover {
   text-decoration: none;
 }
-h1, h2, h3, p, code {
+h1,
+h2,
+h3,
+p,
+code {
   color: #000;
 }
 .mono-field {
-  font-family: "SFMono", Menlo, Monaco, Consolas, "Courier New",
-  monospace;
+  font-family: "SFMono", Menlo, Monaco, Consolas, "Courier New", monospace;
 
   width: 2rem;
   text-align: center;
