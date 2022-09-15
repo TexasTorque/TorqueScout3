@@ -2,6 +2,13 @@
 
 The 2023 Texas Torque Scouting Application.
 
+<!-- 
+Name | Date | Hours... 
+Jus  | 9/14 | 2
+Jus  | 9/15 | 1.5, 1.5, 1.5
+-->
+Was made in **6.5** hours.
+
 ## Architecture
 
 The frontend uses React.JS and is hosted using Netlify.
@@ -14,9 +21,9 @@ Maybe we'll add this.
 
 Market Deco follow naming convention.
 
-## Authors
+<!-- ## Authors
 
 - Justus Languell
 - Omar Afzal
 - Suhas Guddeti
-- Rohan Balla
+- Rohan Balla -->
