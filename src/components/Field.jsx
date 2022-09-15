@@ -11,7 +11,7 @@ import Form from "react-bootstrap/Form";
 
 import { default as Null } from "./Null";
 
-const Field = ({ name, callback, placeholder, readonly }) => {
+const Field = ({ name, callback, placeholder, readonly, type }) => {
   return (
     <div className="numeric">
       <div className="row mt-4 mr-3">
@@ -21,9 +21,9 @@ const Field = ({ name, callback, placeholder, readonly }) => {
         <div className="ml-0 mt-1" style={{ width: "10rem" }}>
           <Form.Control
             disabled={readonly != null}
-            onChange={(e) => e}
+            onChange={e => callback(e.target.value)}
             className="w-100"
-            type="text"
+            type={type ?? "text"}
             placeholder={placeholder ?? (readonly ?? "")}
           />
         </div>

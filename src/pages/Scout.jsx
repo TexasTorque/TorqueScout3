@@ -64,10 +64,10 @@ const Scout = () => {
 
   const username = user ? user.email.split("@")[0] : "null";
 
-  const logout = () => {
-    auth.signOut();
-    navigate("/login");
-  }
+  // const logout = () => {
+  //   auth.signOut();
+  //   navigate("/login");
+  // }
 
   return (
     <div className="scout">
@@ -77,7 +77,7 @@ const Scout = () => {
         {/* </div> */}
         <Group name="Scouting">
         {/* <Group> */}
-          <Field name="Scouter" callback={hook("info.match", null)} readonly={username} />
+          <Field name="Scouter" callback={_ => _} readonly={username} />
           <Click2 name="Logout" callback={() => logout()} />
           <Click2 name="Submit" callback={() => submit()} />
         </Group>

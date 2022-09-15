@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { auth, db, logout, logInWithEmailAndPassword } from "../firebase";
+import { query, collection, getDocs, where } from "firebase/firestore";
+import Card from "react-bootstrap/Card";
+
 import { default as Loader } from "../components/Loader";
-import "./Login.css";
+import { default as Numeric } from "../components/Numeric";
+import { default as Group } from "../components/Group";
+import { default as Toggle } from "../components/Toggle";
+import { default as Field } from "../components/Field";
+import { default as Exclusive } from "../components/Exclusive";
+import { default as Click } from "../components/Click";
+import { default as Click2 } from "../components/Click2";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,44 +27,29 @@ const Login = () => {
     if (user) navigate("/scout");
   }, [user, loading]);
 
+  const login = () => {
+    console.log(email);
+    console.log(password);
+    logInWithEmailAndPassword(email, password);
+    navigate('/scout');
+    // auth.signInWithEmailAndPassword(email, password).catch((error) => {
+      // alert(error.message);
+    // });
+  }
+
   return (
-    <div>
-      <div className="login">
-        <div className="login__container">
-          <h2>
-            Login<br></br>
-          </h2>
-          <br></br>
-          <input
-            type="text"
-            className="login__textBox"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="E-mail Address"
-          />
-          <input
-            type="password"
-            className="login__textBox"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-          <button
-            className="login__btn"
-            onClick={() => logInWithEmailAndPassword(email, password)}
-          >
-            Login
-          </button>
-          {/* <button className="login__btn login__google" onClick={signInWithGoogle}>
-            Login with Google
-          </button>
-          <div>
-            <Link to="/reset">Forgot Password</Link>
-          </div>
-          <div>
-            Don't have an account? <Link to="/register">Register</Link> now.
-          </div> */}
-        </div>
+    <div className="scout">
+      <div className="container mt-4">
+        {/* <div className="row ml-2"> */}
+          {/* <h1>Torque Scout 3</h1> */}
+        {/* </div> */}
+        <Group name="Login">
+        {/* <Group> */}
+          <Click2 name="Back to home" callback={() => navigate('/')} />
+          <Field name="EMail" callback={e => setEmail(e)} />
+          <Field name="Password" callback={e => setPassword(e)} type="password" />
+          <Click2 name="Login" callback={() => login()} />
+        </Group>
       </div>
     </div>
   );
