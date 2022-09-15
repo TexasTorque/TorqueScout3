@@ -58,25 +58,21 @@ const Scout = () => {
 
     if (!window.confirm("Are you sure you want to submit?")) return;
 
+    local = report;
+    local["meta.username"] = name;
+    local["meta.timestamp"] = new Date().getTime();
+    setReport(local);
+
     // db.collection("match-" + report['info.match']).add(report);
     console.log(report);
   };
 
   const username = user ? user.email.split("@")[0] : "null";
 
-  // const logout = () => {
-  //   auth.signOut();
-  //   navigate("/login");
-  // }
-
   return (
     <div className="scout">
       <div className="container mt-4">
-        {/* <div className="row ml-2"> */}
-          {/* <h1>Torque Scout 3</h1> */}
-        {/* </div> */}
         <Group name="Scouting">
-        {/* <Group> */}
           <Field name="Scouter" callback={_ => _} readonly={username} />
           <Click2 name="Logout" callback={() => logout()} />
           <Click2 name="Submit" callback={() => submit()} />
@@ -113,17 +109,7 @@ const Scout = () => {
             callback={hook("climb.level", "None")}
           />
         </Group>
-        {/* <Group name="Submit">
-        </Group> */}
       </div>
-      {/* START: THIS IS DEBUG STUFF */}
-      <br></br>
-      <br></br>
-      <br></br>
-      <span>
-        <code>{JSON.stringify(report)}</code>
-      </span>
-      {/* END: THIS IS DEBUG STUFF */}
     </div>
   );
 };

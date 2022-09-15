@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { default as Home } from "./pages/Home";
 import { default as Login } from "./pages/Login";
-import { default as Dashboard } from "./pages/Dashboard";
 import { default as Scout } from "./pages/Scout";
 import { default as NotFound } from "./pages/NotFound";
 
@@ -16,7 +15,6 @@ ReactDOM.render(
       <Route path="/" element={<Home />} />
       <Route path="/index" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/scout" element={<Scout />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

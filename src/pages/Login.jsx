@@ -28,23 +28,14 @@ const Login = () => {
   }, [user, loading]);
 
   const login = () => {
-    console.log(email);
-    console.log(password);
     logInWithEmailAndPassword(email, password);
     navigate('/scout');
-    // auth.signInWithEmailAndPassword(email, password).catch((error) => {
-      // alert(error.message);
-    // });
   }
 
   return (
-    <div className="scout">
+    <div className="login">
       <div className="container mt-4">
-        {/* <div className="row ml-2"> */}
-          {/* <h1>Torque Scout 3</h1> */}
-        {/* </div> */}
         <Group name="Login">
-        {/* <Group> */}
           <Click2 name="Back to home" callback={() => navigate('/')} />
           <Field name="EMail" callback={e => setEmail(e)} />
           <Field name="Password" callback={e => setPassword(e)} type="password" />
