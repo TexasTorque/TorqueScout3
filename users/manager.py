@@ -22,10 +22,20 @@ def save_users(users):
 def export_cred(users):
     filename = './cred.txt'
     with open(filename, 'w') as f:
+        # f.write('Torque Scout 3 Account Login Information\n\n')
         for uid in users:
             user = users[uid]
             #[first, last, id, password, email]
             f.write(user[2].ljust(8) + ' ' + user[3] + ' (' + user[0] + ' ' + user[1] + ')\n')
+            
+def export_admin(users):
+    filename = './admin.txt'
+    with open(filename, 'w') as f:
+        # f.write('Torque Scout 3 Admin Database Account Entries\n\n')
+        for uid in users:
+            user = users[uid]
+            #[first, last, id, password, email]
+            f.write(user[-1].ljust(8 + len('@scout.texastorque.org')) + ' ' + user[3] + '\n')
 
 def get_id(first, last):
     if len(first) > 3:
@@ -67,4 +77,5 @@ if __name__ == '__main__':
             users = add_user(users, name)
     save_users(users)
     export_cred(users)
+    export_admin(users)
 

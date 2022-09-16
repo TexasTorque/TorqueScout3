@@ -9,7 +9,7 @@ import { default as Loader } from "../components/Loader";
 import { default as TextField } from "../components/TextField";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [id, setID] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const Login = () => {
   }, [user, loading]);
 
   const login = () => {
+    const email = id + '@scout.texastorque.org';
     logInWithEmailAndPassword(email, password);
     navigate('/scout');
   }
@@ -31,7 +32,7 @@ const Login = () => {
       <div className="container mt-4">
         <Group name="Login">
           <ButtonFull name="Back to home" callback={() => navigate('/')} />
-          <TextField name="EMail" callback={e => setEmail(e)} />
+          <TextField name="Username" callback={e => setID(e)} />
           <TextField name="Password" callback={e => setPassword(e)} type="password" />
           <ButtonFull name="Login" callback={() => login()} />
         </Group>

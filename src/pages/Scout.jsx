@@ -65,7 +65,7 @@ const Scout = () => {
 
     submitReport(report);
 
-    console.log(report);
+    navigate('/scout');
   };
 
   const username = user ? user.email.split("@")[0] : "null";
