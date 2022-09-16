@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./index.css";
 
 import { default as Home } from "./pages/Home";
 import { default as Login } from "./pages/Login";
-import { default as Scout } from "./pages/Scout";
 import { default as NotFound } from "./pages/NotFound";
+import { default as Scout } from "./pages/Scout";
 
 ReactDOM.render(
   <Router>

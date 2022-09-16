@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { auth, db, logout, logInWithEmailAndPassword } from "../firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
-import Card from "react-bootstrap/Card";
+import { auth, logInWithEmailAndPassword } from "../firebase";
 
-import { default as Loader } from "../components/Loader";
-import { default as Numeric } from "../components/Numeric";
-import { default as Group } from "../components/Group";
-import { default as Toggle } from "../components/Toggle";
-import { default as TextField } from "../components/TextField";
-import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
-import { default as ButtonHalf } from "../components/ButtonHalf";
 import { default as ButtonFull } from "../components/ButtonFull";
+import { default as Group } from "../components/Group";
+import { default as Loader } from "../components/Loader";
+import { default as TextField } from "../components/TextField";
 
 const Login = () => {
   const [email, setEmail] = useState("");
