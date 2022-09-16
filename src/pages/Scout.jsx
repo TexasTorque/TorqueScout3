@@ -70,12 +70,20 @@ const Scout = () => {
 
   const username = user ? user.email.split("@")[0] : "null";
 
+  const confirmExit = (callback) => {
+    return () => {
+      if (window.confirm("Are you sure you want to leave?"))
+        callback();
+    };
+  }
+
   return (
     <div className="scout">
       <div className="container mt-4">
         <Group name="Scouting">
           <TextField name="Scouter" callback={_ => _} readonly={username} />
-          <ButtonFull name="Logout" callback={() => logout()} />
+          <ButtonFull name="Exit" callback={confirmExit(() => navigate('/'))} />
+          <ButtonFull name="Logout" callback={confirmExit(() => logout())} />
           <ButtonFull name="Submit" callback={() => submit()} />
         </Group>
         <Group name="Info">

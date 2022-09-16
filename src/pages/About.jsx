@@ -11,19 +11,19 @@ import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
 import { default as ButtonHalf } from "../components/ButtonHalf";
 import { default as ButtonFull } from "../components/ButtonFull";
 
-const Home = () => {
+const About = () => {
   const navigate = useNavigate();
   return (
     <div className="home">
       <div className="container mt-4">
-        <Group name="Torque Scout 3">
-          <ButtonFull name="Scout" callback={() => navigate('/scout')} />
-          <ButtonFull name="Analysis" callback={() => alert("Analysis yet to be implemented")} />
-          <ButtonFull name="About" callback={() => navigate('/about')} />
+        <Group name="About">
+          <p className="mt-4" style={{width: '18rem'}}>Torque Scout 3 was initially written by <a href="https://justusl.com">Justus Languell</a> in 1 day.</p>
+          <ButtonFull name="View the code" callback={() => navigate('https://github.com/texastorque/TorqueScout3')} />
+          <ButtonFull name="Back to home" callback={() => navigate('/')} />
         </Group>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default About;
