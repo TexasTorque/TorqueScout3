@@ -58,9 +58,18 @@ export const submitReport = async (report) => {
   const match = 'match-' + report['info.match'];
   await setDoc(doc(db, match, team), report);
   await setDoc(doc(db, team, match), report);
+  await setDoc(doc(db, "meta", "team-dir"), { team: report['info.team'], match: report['info.match'] });
 }
 
 export const getUserFromID = async (id) => {
   const user = await getDoc(doc(db, 'users', id));
   return user.data();
 }
+
+export const getMatchesPerTeam = async (team) => {
+  let matches = [];
+  const docs = await getDocs(collection(db, 'team-' + team));
+  docs.forEach(doc => matches.push(doc.data()));
+  return matches;
+}
+

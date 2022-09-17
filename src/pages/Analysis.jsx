@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -11,19 +11,22 @@ import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
 import { default as ButtonHalf } from "../components/ButtonHalf";
 import { default as ButtonFull } from "../components/ButtonFull";
 
-const Home = () => {
+const Analysis = () => {
   const navigate = useNavigate();
+
+  const [team, setTeam] = useState(0);
+
   return (
     <div className="home">
       <div className="container mt-4">
-        <Group name="Torque Scout 3">
-          <ButtonFull name="Scout" callback={() => navigate('/scout')} />
-          <ButtonFull name="Analysis" callback={() => navigate('/analysis')} />
-          <ButtonFull name="About" callback={() => navigate('/about')} />
+        <Group name="Analysis">
+          <ButtonFull name="View Averages" callback={() => navigate('/avgs')} />
+          <TextField name="Team" callback={v => setTeam(v)} type="number" inputMode="decimal"/>
+          <ButtonFull name="View By Team" callback={() => navigate('/team/' + team)} />
         </Group>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Analysis;
