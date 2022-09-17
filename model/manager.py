@@ -36,6 +36,26 @@ def export_admin(users):
             user = users[uid]
             #[first, last, id, password, email]
             f.write(user[-1].ljust(8 + len('@scout.texastorque.org')) + ' ' + user[3] + '\n')
+            
+def export_raw(users):
+    for usr in users:
+        tmp = {
+        'first': 0,
+        'last': 0,
+        'id': 0,
+        'password': 0,
+        'email': 0
+        }
+        for i, key in enumerate(tmp):
+            tmp[key] = users[usr][i]
+        users[usr] = tmp
+    print(users) 
+    filename = './users.json'
+    with open(filename, 'w') as f:
+        f.write(str(users).replace("'", '"'))
+    filename = '../src/users.json'
+    with open(filename, 'w') as f:
+        f.write(str(users).replace("'", '"'))
 
 def get_id(first, last):
     if len(first) > 3:
@@ -53,7 +73,7 @@ def add_user(users, name):
     id = get_id(first, last).lower()
     password = get_random_password()
     email = id + '@scout.texastorque.org'
-    users[first + last] = [first, last, id, password, email]
+    users[id] = [first, last, id, password, email]
     return users
 
 def user_present(users, name):
@@ -78,4 +98,5 @@ if __name__ == '__main__':
     save_users(users)
     export_cred(users)
     export_admin(users)
+    export_raw(users)
 
