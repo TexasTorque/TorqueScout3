@@ -87,8 +87,8 @@ const Scout = () => {
           <ButtonFull name="Submit" callback={() => submit()} />
         </Group>
         <Group name="Info">
-          <TextField name="Match" callback={hook("info.match", null)} type="number"/>
-          <TextField name="Team" callback={hook("info.team", null)} type="number"/>
+          <TextField name="Match" callback={hook("info.match", null)} type="number" inputmode="decimal"/>
+          <TextField name="Team" callback={hook("info.team", null)} type="number" inputmode="decimal"/>
           <Toggle
             name="Alliance"
             on="primary"
