@@ -27,12 +27,37 @@ const Team = () => {
   return (
     <div className="home">
       <div className="container mt-4">
-        <Group name="Analysis">
-          {team}
-
-          <span>
-            <code>{JSON.stringify(teamData)}</code>
-          </span>
+        <Group name={"Matches for " + team}>
+        <table>
+          <thead>
+            <tr>
+              <th>Match</th>
+              <th>Auto Taxi</th>
+              <th>Auto Lower</th>
+              <th>Auto Upper</th>
+              <th>Auto Missed</th>
+              <th>Teleop Lower</th>
+              <th>Teleop Upper</th>
+              <th>Teleop Missed</th>
+            </tr>
+          </thead>
+          <tbody>{/*
+            {teamData.map((obj) =>(
+              <tr>
+                <td>{obj.match}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            ))}*/}
+            <tr>
+            <td>HI</td>
+            </tr>
+          </tbody>
+      </table>
         </Group>
       </div>
     </div>

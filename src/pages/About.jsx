@@ -18,7 +18,7 @@ const About = () => {
       <div className="container mt-4">
         <Group name="About">
           <p className="mt-4" style={{width: '18rem'}}>Torque Scout 3 was initially written by <a href="https://justusl.com">Justus Languell</a> in 1 day.</p>
-          <ButtonFull name="View the code" callback={() => navigate('https://github.com/texastorque/TorqueScout3')} />
+          <ButtonFull name="View the code" callback={() => window.location = 'https://github.com/texastorque/TorqueScout3'} />
           <ButtonFull name="Back to home" callback={() => navigate('/')} />
         </Group>
       </div>
