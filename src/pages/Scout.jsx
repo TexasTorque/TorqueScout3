@@ -13,6 +13,7 @@ import { default as TextField } from "../components/TextField";
 import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
 import { default as ButtonHalf } from "../components/ButtonHalf";
 import { default as ButtonFull } from "../components/ButtonFull";
+import { default as Stopwatch } from "../components/Stopwatch";
 
 const Scout = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -53,7 +54,7 @@ const Scout = () => {
       }
 
     if (!checked) {
-      alert("Plase double check you're input fields.");
+      alert("Plase double check your input fields.");
       setChecked(true);
       return;
     }
@@ -107,12 +108,7 @@ const Scout = () => {
           <Numeric name="Missed" min={0} callback={hook("teleop.missed")} />
         </Group>
         <Group name="Climb">
-          <Numeric
-            name="Time"
-            increment={5}
-            min={0}
-            callback={hook("climb.time")}
-          />
+          <Stopwatch name="Climb" callback={hook("climb.time")}/>
           <MutuallyExclusive
             elements={["None", "Low", "Mid", "High", "Traverse"]}
             callback={hook("climb.level", "None")}
