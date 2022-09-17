@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { auth, db, logout, submitReport } from "../firebase";
+import { auth, db, logout, submitReport, getUserFromID } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import Card from "react-bootstrap/Card";
 
@@ -21,6 +21,8 @@ const Scout = () => {
   useEffect(() => {
     if (loading) return <Loader />;
     if (!user) return navigate("/login");
+    getUserFromID(user.email.split("@")[0]).then((user) => setName(user['first']));
+
   }, [user, loading]);
 
   const [report, setReport] = useState({});
@@ -68,8 +70,6 @@ const Scout = () => {
     navigate('/login');
   };
 
-  const username = user ? user.email.split("@")[0] : "null";
-
   const confirmExit = (callback) => {
     return () => {
       if (window.confirm("Are you sure you want to leave?"))
@@ -81,14 +81,14 @@ const Scout = () => {
     <div className="scout">
       <div className="container mt-4">
         <Group name="Scouting">
-          <TextField name="Scouter" callback={_ => _} readonly={username} />
+          <TextField name="Scouter" callback={_ => _} readonly={name ?? ""} />
           <ButtonFull name="Exit" callback={confirmExit(() => navigate('/'))} />
           <ButtonFull name="Logout" callback={confirmExit(() => logout())} />
           <ButtonFull name="Submit" callback={() => submit()} />
         </Group>
         <Group name="Info">
-          <TextField name="Match" callback={hook("info.match", null)} type="number" inputmode="decimal"/>
-          <TextField name="Team" callback={hook("info.team", null)} type="number" inputmode="decimal"/>
+          <TextField name="Match" callback={hook("info.match", null)} type="number" inputMode="decimal"/>
+          <TextField name="Team" callback={hook("info.team", null)} type="number" inputMode="decimal"/>
           <Toggle
             name="Alliance"
             on="primary"

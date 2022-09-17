@@ -11,7 +11,7 @@ import Form from "react-bootstrap/Form";
 
 import { default as Null } from "./Null";
 
-const TextField = ({ name, callback, placeholder, readonly, type, inputmode }) => {
+const TextField = ({ name, callback, placeholder, readonly, type, inputMode }) => {
   return (
     <div className="numeric">
       <div className="row mt-4 mr-3">
@@ -25,7 +25,7 @@ const TextField = ({ name, callback, placeholder, readonly, type, inputmode }) =
             className="w-100"
             type={type ?? "text"}
             placeholder={placeholder ?? (readonly ?? "")}
-            inputmode={inputmode}
+            inputMode={inputMode}
           />
         </div>
       </div>

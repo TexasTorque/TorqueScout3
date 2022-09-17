@@ -24,7 +24,7 @@ import {
   remove,
   onValue,
 } from "firebase/database";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 // This is secret
 const firebaseConfig = {
@@ -58,4 +58,9 @@ export const submitReport = async (report) => {
   const match = 'match-' + report['info.match'];
   await setDoc(doc(db, match, team), report);
   await setDoc(doc(db, team, match), report);
+}
+
+export const getUserFromID = async (id) => {
+  const user = await getDoc(doc(db, 'users', id));
+  return user.data();
 }

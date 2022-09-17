@@ -11,6 +11,8 @@ import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
 import { default as ButtonHalf } from "../components/ButtonHalf";
 import { default as ButtonFull } from "../components/ButtonFull";
 
+import { registerUsers } from "../firebase";
+
 const Home = () => {
   const navigate = useNavigate();
   return (
