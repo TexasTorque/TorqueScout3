@@ -18,12 +18,7 @@ Why? Security isn't that big of an concern.
 If it was we would route requests through our own server.
 Maybe we'll add this.
 
-## Todo
-
-Market Deco follow naming convention.
-
 ## Authors
 
-- Justus Languell
-- Suhas Guddeti
-- Jack Pittenger
+- [Justus Languell](https://github.com/Juicestus)
+- [Suhas Guddeti](https://github.com/Suhas44)

@@ -3,15 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { getMatchesPerTeam } from "../firebase";
-
-import { default as Loader } from "../components/Loader";
-import { default as Numeric } from "../components/Numeric";
 import { default as Group } from "../components/Group";
-import { default as Toggle } from "../components/Toggle";
-import { default as TextField } from "../components/TextField";
-import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
-import { default as ButtonHalf } from "../components/ButtonHalf";
-import { default as ButtonFull } from "../components/ButtonFull";
 import Table from "../components/Table";
 
 const Team = () => {
@@ -31,6 +23,7 @@ const Team = () => {
         <Group name={"Matches for " + team}>
           <div className="table_container">
             <Table json={teamData}/>
+            <button className="btn btn-primary" onClick={() => navigate("/")}> Back </button>
           </div>
         </Group>
       </div>
