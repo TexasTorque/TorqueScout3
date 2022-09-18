@@ -28,6 +28,7 @@ const About = () => {
             </ul>
           </p>
           {/* <ButtonFull name="View the code" callback={() => window.location = 'https://github.com/texastorque/TorqueScout3'} /> */}
+          <ButtonFull name="Feedback" callback={() => window.location = 'https://forms.gle/xFdfs48ZrCWbjxhdA'} />
           <ButtonFull name="Back to home" callback={() => navigate('/')} />
         </Group>
       </div>

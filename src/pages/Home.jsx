@@ -20,6 +20,7 @@ const Home = () => {
           <ButtonFull name="Scout" callback={() => navigate('/scout')} />
           <ButtonFull name="Analysis" callback={() => navigate('/analysis')} />
           <ButtonFull name="About" callback={() => navigate('/about')} />
+          <ButtonFull name="Feedback" callback={() => window.location = 'https://forms.gle/xFdfs48ZrCWbjxhdA'} />
         </Group>
       </div>
     </div>
