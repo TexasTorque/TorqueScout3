@@ -38,7 +38,7 @@ return (
         </Col>
         <Col className="ml-0 mt-1">
           <Button variant="success" size="md" onClick={() => update()}>
-            {paused ? "START" : "STOP"}
+            S
           </Button>
         </Col>
         <Col className="ml-0 mt-2">
@@ -46,7 +46,7 @@ return (
         </Col>
         <Col className="ml-0 mt-1">
           <Button variant="danger" size="md" onClick={() => reset()}>
-            {"RESET"}
+            R
           </Button>
         </Col>
       </div>

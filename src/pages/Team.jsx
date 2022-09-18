@@ -12,6 +12,7 @@ import { default as TextField } from "../components/TextField";
 import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
 import { default as ButtonHalf } from "../components/ButtonHalf";
 import { default as ButtonFull } from "../components/ButtonFull";
+import Table from "../components/Table";
 
 const Team = () => {
   const navigate = useNavigate();
@@ -27,12 +28,10 @@ const Team = () => {
   return (
     <div className="home">
       <div className="container mt-4">
-        <Group name="Analysis">
-          {team}
-
-          <span>
-            <code>{JSON.stringify(teamData)}</code>
-          </span>
+        <Group name={"Matches for " + team}>
+          <div className="table_container">
+            <Table json={teamData}/>
+          </div>
         </Group>
       </div>
     </div>
