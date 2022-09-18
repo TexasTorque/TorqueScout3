@@ -3,8 +3,6 @@ import TableBody from "./TableBody";
 import TableHead from "./TableHead";
 
 const Table = ({ json }) => {
- let [tableData, setTableData] = useState(json);
-
  const columns = [
   { label: "Match", accessor: "info.match" },
   { label: "Auto Taxi", accessor: "auto.taxi" },
@@ -23,7 +21,7 @@ const Table = ({ json }) => {
   <>
    <table className="table">
     <TableHead columns={columns} />
-    <TableBody columns={columns} tableData={tableData} />
+    <TableBody columns={columns} tableData={json} />
    </table>
   </>
  );
