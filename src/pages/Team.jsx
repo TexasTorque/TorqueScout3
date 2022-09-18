@@ -12,6 +12,7 @@ import { default as TextField } from "../components/TextField";
 import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
 import { default as ButtonHalf } from "../components/ButtonHalf";
 import { default as ButtonFull } from "../components/ButtonFull";
+import Table from "../components/Table";
 
 const Team = () => {
   const navigate = useNavigate();
@@ -28,36 +29,9 @@ const Team = () => {
     <div className="home">
       <div className="container mt-4">
         <Group name={"Matches for " + team}>
-        <table>
-          <thead>
-            <tr>
-              <th>Match</th>
-              <th>Auto Taxi</th>
-              <th>Auto Lower</th>
-              <th>Auto Upper</th>
-              <th>Auto Missed</th>
-              <th>Teleop Lower</th>
-              <th>Teleop Upper</th>
-              <th>Teleop Missed</th>
-            </tr>
-          </thead>
-          <tbody>{/*
-            {teamData.map((obj) =>(
-              <tr>
-                <td>{obj.match}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            ))}*/}
-            <tr>
-            <td>HI</td>
-            </tr>
-          </tbody>
-      </table>
+          <div className="table_container">
+            <Table json={teamData}/>
+          </div>
         </Group>
       </div>
     </div>
