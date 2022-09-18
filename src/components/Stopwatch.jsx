@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 
+import PauseIcon from "@mui/icons-material/Pause";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import ReplayIcon from "@mui/icons-material/Replay";
+
 import { default as Null } from "./Null";
 
 const Stopwatch = ({ name, callback }) => {
@@ -10,17 +14,15 @@ const Stopwatch = ({ name, callback }) => {
   let [paused, setPaused] = useState(true);
   let [interval, setIntervalVariable] = useState(null);
 
+  const rate = 0.1;
+
   const update = () => {
-    if (paused) {
-        if(interval != null){
-            clearInterval(interval);
-        }
-        setIntervalVariable(setInterval(() => {
-          setElapsed((elapsed) => elapsed + 0.1);
-        }, 100));
-    } else {
-        clearInterval(interval);
-    }
+    if (paused)
+      setIntervalVariable(
+        setInterval(() => setElapsed((elapsed) => elapsed + rate), 1e3 * rate)
+      );
+    else clearInterval(interval);
+
     setPaused(!paused);
     callback(elapsed);
   };
@@ -30,7 +32,7 @@ const Stopwatch = ({ name, callback }) => {
     setPaused(true);
   };
 
-return (
+  return (
     <div className="numeric">
       <div className="row mt-4 mr-1">
         <Col className="ml-0 mt-2">
@@ -38,15 +40,21 @@ return (
         </Col>
         <Col className="ml-0 mt-1">
           <Button variant="success" size="md" onClick={() => update()}>
-            S
+            {!paused ? (
+              <PauseIcon fontSize="small" />
+            ) : (
+              <PlayArrowIcon fontSize="small" />
+            )}
           </Button>
         </Col>
         <Col className="ml-0 mt-2">
-          <h4 className="mono-field">{Math.floor(elapsed)}</h4>
+          <h4 className="mono-field" style={{ width: "0rem" }}>
+            {Math.floor(elapsed)}
+          </h4>
         </Col>
         <Col className="ml-0 mt-1">
           <Button variant="danger" size="md" onClick={() => reset()}>
-            R
+            <ReplayIcon fontSize="small" />
           </Button>
         </Col>
       </div>
