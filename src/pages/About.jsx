@@ -1,14 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-
-import { default as Loader } from "../components/Loader";
-import { default as Numeric } from "../components/Numeric";
 import { default as Group } from "../components/Group";
-import { default as Toggle } from "../components/Toggle";
-import { default as TextField } from "../components/TextField";
-import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
-import { default as ButtonHalf } from "../components/ButtonHalf";
 import { default as ButtonFull } from "../components/ButtonFull";
 
 const About = () => {
@@ -22,9 +15,9 @@ const About = () => {
           <h5>Authors</h5>
           <p className="mt-2" style={{width: '18rem'}}>
             <ul>
-              <li>Justus Languell</li>
-              <li>Suhas Guddeti</li>
-              <li>Jack Pittenger</li>
+              <li><a href="https://github.com/Juicestus">Justus Languell</a></li>
+              <li><a href="https://github.com/Suhas44">Suhas Guddeti</a></li>
+              <li><a href="https://github.com/realSaddy">Jack Pittenger</a></li>
             </ul>
           </p>
           {/* <ButtonFull name="View the code" callback={() => window.location = 'https://github.com/texastorque/TorqueScout3'} /> */}
