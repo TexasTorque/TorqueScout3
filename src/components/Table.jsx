@@ -1,17 +1,43 @@
 import React, { useState, useEffect } from "react";
 
+import { query, collection, getDocs, where } from "firebase/firestore";
+import { auth, db, logout, submitReport, getUserFromID } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+
 import Button from "react-bootstrap/Button";
+
 import Null from "./Null";
+import Loader from "./Loader";
+
+import {default as BootstrapTable} from 'react-bootstrap/Table'; 
+// This is to avoid name conflict between the react-bootstrap 
+// table and our table.
+// 
+// This is like "import this as that" in Python
+
 
 export const makeColumn = (label, accessor, sortable = true) => {
   return { label: label, accessor: accessor, sortable: sortable };
 };
 
 const Table = ({ json, columns, defaultSortField }) => {
+  const navigate = useNavigate();
+
   const [sortField, setSortField] = useState(defaultSortField);
   const [data, setData] = useState(json);
 
   useEffect(() => setData(json), [json, data]);
+
+  const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    if (loading) return <Loader />;
+    if (!user) return navigate("/login");
+    // getUserFromID(user.email.split("@")[0]).then((user) =>
+    //   setName(user["first"])
+    // );
+  }, [user, loading]);
 
   const handleSort = (field) => {
     setSortField(field);
@@ -30,8 +56,8 @@ const Table = ({ json, columns, defaultSortField }) => {
 
   return (
     <>
-      <table className="table mt-4">
-        <thead>
+      <BootstrapTable striped bordered hover>
+        <thead className="tbl">
           <tr>
             {columns.map(({ label, accessor, sortable }) => (
               // <th key={accessor}>
@@ -50,7 +76,7 @@ const Table = ({ json, columns, defaultSortField }) => {
           </tr>
         </thead>
         { data == null ? <Null /> : (
-          <tbody>
+          <tbody className="tbl">
             {data.map(row => (
               <tr>
                 {columns.map(({ accessor }) => {
@@ -61,7 +87,7 @@ const Table = ({ json, columns, defaultSortField }) => {
             ))}
           </tbody>
         )}
-      </table>
+      </BootstrapTable>
     </>
   );
 };
