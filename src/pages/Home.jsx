@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="container mt-4">
-        <Group name="Torque Scout 3">
+        <Group name="Torque Scout">
           <ButtonFull name="Scout" callback={() => navigate("/scout")} />
           <ButtonFull name="Analysis" callback={() => navigate("/analysis")} />
           {/* <ButtonFull name="Login" callback={() => navigate("/login/index")} /> */}

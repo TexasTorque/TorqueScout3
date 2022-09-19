@@ -121,6 +121,8 @@ const Scout = () => {
           <Numeric name="Lower" min={0} callback={hook("teleop.low")} />
           <Numeric name="Upper" min={0} callback={hook("teleop.upper")} />
           <Numeric name="Missed" min={0} callback={hook("teleop.missed")} />
+          <Toggle name="Defense" callback={hook("teleop.defense", false)} />
+          <Toggle name="Broken" callback={hook("teleop.broken", false)} />
         </Group>
         <Group name="Climb">
           <Stopwatch name="Climb" callback={hook("climb.time")} />

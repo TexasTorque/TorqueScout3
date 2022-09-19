@@ -24,10 +24,11 @@ const Stopwatch = ({ name, callback }) => {
     else clearInterval(interval);
 
     setPaused(!paused);
-    callback(elapsed);
+    callback(Math.round(elapsed));
   };
 
   const reset = () => {
+    if (!paused) update();
     setElapsed(0);
     setPaused(true);
   };
@@ -48,7 +49,7 @@ const Stopwatch = ({ name, callback }) => {
           </Button>
         </Col>
         <Col className="ml-0 mt-2">
-          <h4 className="mono-field" style={{ width: "0rem" }}>
+          <h4 className="mono-field">
             {Math.floor(elapsed)}
           </h4>
         </Col>

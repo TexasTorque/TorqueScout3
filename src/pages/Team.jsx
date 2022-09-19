@@ -30,6 +30,8 @@ const Team = () => {
         ...row,
         "auto.taxi": row["auto.taxi"] ? "Yes" : "No",
         "auto.score": autoScore,
+        "teleop.defense": row["teleop.defense"] ? "Yes" : "No",
+        "teleop.broken": row["teleop.broken"] ? "Yes" : "No",
         "teleop.score": teleopScore,
         // "climb.score": climbLevels[row["climb.level"] ?? "None"],
         // "total.score": row["auto.score"] + row["teleop.score"] + row["climb.score"],
@@ -57,9 +59,12 @@ const Team = () => {
     makeColumn("Teleop Upper", "teleop.upper"),
     makeColumn("Teleop Missed", "teleop.missed"),
     makeColumn("Teleop Score", "teleop.score"),
-
+    
     makeColumn("Climb Level", "climb.level", false),
     makeColumn("Climb Time", "climb.time"),
+
+    makeColumn("Defense", "teleop.defense", false),
+    makeColumn("Broken", "teleop.broken", false),
 
     makeColumn("Scouter", "meta.username", false),
   ];
