@@ -7,7 +7,7 @@ import PauseIcon from "@mui/icons-material/Pause";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ReplayIcon from "@mui/icons-material/Replay";
 
-import { default as Null } from "./Null";
+import Null from "./Null";
 
 const Stopwatch = ({ name, callback }) => {
   let [elapsed, setElapsed] = useState(0);

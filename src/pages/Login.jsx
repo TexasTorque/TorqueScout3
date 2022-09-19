@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { auth, logInWithEmailAndPassword } from "../firebase";
 
-import { default as ButtonFull } from "../components/ButtonFull";
-import { default as Group } from "../components/Group";
-import { default as Loader } from "../components/Loader";
-import { default as TextField } from "../components/TextField";
+import ButtonFull from "../components/ButtonFull";
+import Group from "../components/Group";
+import Loader from "../components/Loader";
+import TextField from "../components/TextField";
 
-const Login = () => {
+
+const Login = ({}) => {
+  const { redirect } = useParams();
+
   const [id, setID] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
@@ -18,22 +21,26 @@ const Login = () => {
     if (loading) {
       return <Loader />;
     }
-    if (user) navigate("/scout");
+    if (user) navigate("/" + redirect ?? "/");
   }, [user, loading]);
 
   const login = () => {
-    const email = id + '@scout.texastorque.org';
+    const email = id + "@scout.texastorque.org";
     logInWithEmailAndPassword(email, password);
-    navigate('/scout');
-  }
+    navigate("/login/" + redirect ?? "/");
+  };
 
   return (
     <div className="login">
       <div className="container mt-4">
         <Group name="Login">
-          <ButtonFull name="Back to home" callback={() => navigate('/')} />
-          <TextField name="Username" callback={e => setID(e)} />
-          <TextField name="Password" callback={e => setPassword(e)} type="password" />
+          <ButtonFull name="Back to home" callback={() => navigate("/")} />
+          <TextField name="Username" callback={(e) => setID(e)} />
+          <TextField
+            name="Password"
+            callback={(e) => setPassword(e)}
+            type="password"
+          />
           <ButtonFull name="Login" callback={() => login()} />
         </Group>
       </div>

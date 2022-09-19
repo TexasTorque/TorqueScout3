@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 
 import Card from "react-bootstrap/Card";
 
-import { default as Null } from "./Null";
+import Null from "./Null";
 
 const Group = ({ name, children }) => {
   return (
@@ -20,7 +20,9 @@ const Group = ({ name, children }) => {
           <Card.Header>
             <h3>{name}</h3>
           </Card.Header>
-        ) : ""}
+        ) : (
+          ""
+        )}
         <div className="ml-4 mr-4 mb-4">{children}</div>
       </Card>
     </div>

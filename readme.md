@@ -1,14 +1,15 @@
 # TorqueScout 3
 
-The 2023 Texas Torque Scouting Application.
+The Texas Torque Scouting Application for Remix.
+Testing for the 2023 season.
 
-<!--
-Name | Date | Hours...
-Jus  | 9/14 | 2
-Jus  | 9/15 | 1.5, 1.5, 1.5
--->
+## TorqueScout 4
 
-Was made in **6.5** hours.
+TorqueScout 4 will be an improved version implemented to:
+
+- Support the 2023 game.
+- Have an improved, more scalable login system under the hood.
+- More advanced analysis tools.
 
 ## Architecture
 

@@ -5,15 +5,15 @@ import { auth, db, logout, submitReport, getUserFromID } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import Card from "react-bootstrap/Card";
 
-import { default as Loader } from "../components/Loader";
-import { default as Numeric } from "../components/Numeric";
-import { default as Group } from "../components/Group";
-import { default as Toggle } from "../components/Toggle";
-import { default as TextField } from "../components/TextField";
-import { default as MutuallyExclusive } from "../components/MutuallyExclusive";
-import { default as ButtonHalf } from "../components/ButtonHalf";
-import { default as ButtonFull } from "../components/ButtonFull";
-import { default as Stopwatch } from "../components/Stopwatch";
+import Loader from "../components/Loader";
+import Numeric from "../components/Numeric";
+import Group from "../components/Group";
+import Toggle from "../components/Toggle";
+import TextField from "../components/TextField";
+import MutuallyExclusive from "../components/MutuallyExclusive";
+import ButtonHalf from "../components/ButtonHalf";
+import ButtonFull from "../components/ButtonFull";
+import Stopwatch from "../components/Stopwatch";
 
 const Scout = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -21,9 +21,15 @@ const Scout = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) return <Loader />;
-    if (!user) return navigate("/login");
-    getUserFromID(user.email.split("@")[0]).then((user) => setName(user['first']));
-
+    if (!user) return navigate("/login/scout");
+    getUserFromID(user.email.split("@")[0]).then(user => {
+      if (user == null) {
+        alert("User was can not be found (was probably deleted).");
+        logout();
+        return navigate("login/scout");
+      }
+      setName(user["first"])
+    });
   }, [user, loading]);
 
   const [report, setReport] = useState({});
@@ -68,28 +74,37 @@ const Scout = () => {
 
     submitReport(report);
 
-    navigate('/login');
+    navigate("/login/scout");
   };
 
   const confirmExit = (callback) => {
     return () => {
-      if (window.confirm("Are you sure you want to leave?"))
-        callback();
+      if (window.confirm("Are you sure you want to leave?")) callback();
     };
-  }
+  };
 
   return (
     <div className="scout">
       <div className="container mt-4">
         <Group name="Scouting">
-          <TextField name="Scouter" callback={_ => _} readonly={name ?? ""} />
-          <ButtonFull name="Exit" callback={confirmExit(() => navigate('/'))} />
+          <TextField name="Scouter" callback={(_) => _} readonly={name ?? ""} />
+          <ButtonFull name="Exit" callback={confirmExit(() => navigate("/"))} />
           <ButtonFull name="Logout" callback={confirmExit(() => logout())} />
           <ButtonFull name="Submit" callback={() => submit()} />
         </Group>
         <Group name="Info">
-          <TextField name="Match" callback={hook("info.match", null)} type="number" inputMode="decimal"/>
-          <TextField name="Team" callback={hook("info.team", null)} type="number" inputMode="decimal"/>
+          <TextField
+            name="Match"
+            callback={hook("info.match", null)}
+            type="number"
+            inputMode="decimal"
+          />
+          <TextField
+            name="Team"
+            callback={hook("info.team", null)}
+            type="number"
+            inputMode="decimal"
+          />
           <Toggle
             name="Alliance"
             on="primary"
@@ -108,7 +123,7 @@ const Scout = () => {
           <Numeric name="Missed" min={0} callback={hook("teleop.missed")} />
         </Group>
         <Group name="Climb">
-          <Stopwatch name="Climb" callback={hook("climb.time")}/>
+          <Stopwatch name="Climb" callback={hook("climb.time")} />
           <MutuallyExclusive
             elements={["None", "Low", "Mid", "High", "Traverse"]}
             callback={hook("climb.level", "None")}

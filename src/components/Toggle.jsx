@@ -8,7 +8,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import { default as Null } from "./Null";
+import Null from "./Null";
 
 const Toggle = ({ name, callback, init, on, off, id }) => {
   const [value, setValue] = useState(init ?? false);

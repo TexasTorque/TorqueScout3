@@ -8,7 +8,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import { default as Null } from "./Null";
+import Null from "./Null";
 
 const Numeric = ({ name, callback, min, max, init, increment }) => {
   const [count, setCount] = useState(init || 0);
