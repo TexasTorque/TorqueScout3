@@ -21,8 +21,18 @@ const Team = () => {
   const processData = (data) => {
     return data.map(row => {
 
-      const autoScore = (row["auto.low"] ?? 0) * 2 + (row["auto.upper"] ?? 0) * 4;
-      const teleopScore = (row["teleop.low"] ?? 0) * 1 + (row["teleop.upper"] ?? 0) * 2;
+      const autoLower = row["auto.low"] ?? 0;
+      const autoUpper = row["auto.upper"] ?? 0;
+      const autoMissed = row["auto.missed"] ?? 0;
+
+      const teleopLower = row["teleop.low"] ?? 0;
+      const teleopUpper = row["teleop.upper"] ?? 0;
+      const teleopMissed = row["teleop.missed"] ?? 0;
+
+      const autoScore = (autoLower) * 2 + (autoUpper) * 4;
+      const autoAccuracy = (autoLower + autoUpper) > 0 ? Number(((autoLower + autoUpper) / (autoLower + autoUpper + autoMissed))).toFixed(2) : 0;
+      const teleopScore = (teleopLower) * 1 + (teleopUpper) * 2;
+      const teleopAccuracy = (teleopLower + teleopUpper) > 0 ? Number(((teleopLower + teleopUpper) / (teleopLower + teleopUpper + teleopMissed)).toFixed(2)) : 0;
       const climbScore =  climbLevels[row["climb.level"] ?? "None"];
       const totalScore = autoScore + teleopScore + climbScore;
      
@@ -30,6 +40,8 @@ const Team = () => {
         ...row,
         "auto.taxi": row["auto.taxi"] ? "Yes" : "No",
         "auto.score": autoScore,
+        "auto.accuracy": autoAccuracy,
+        "teleop.accuracy": teleopAccuracy,
         "teleop.defense": row["teleop.defense"] ? "Yes" : "No",
         "teleop.broken": row["teleop.broken"] ? "Yes" : "No",
         "teleop.score": teleopScore,
@@ -54,11 +66,13 @@ const Team = () => {
     makeColumn("Auto Upper", "auto.upper"),
     makeColumn("Auto Missed", "auto.missed"),
     makeColumn("Auto Score", "auto.score"),
+    makeColumn("Auto Accuracy", "auto.accuracy"),
 
     makeColumn("Teleop Lower", "teleop.low"),
     makeColumn("Teleop Upper", "teleop.upper"),
     makeColumn("Teleop Missed", "teleop.missed"),
     makeColumn("Teleop Score", "teleop.score"),
+    makeColumn("Teleop Accuracy", "teleop.accuracy"),
     
     makeColumn("Climb Level", "climb.level", false),
     makeColumn("Climb Time", "climb.time"),
