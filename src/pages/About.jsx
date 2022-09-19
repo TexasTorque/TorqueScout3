@@ -1,8 +1,8 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { default as Group } from "../components/Group";
-import { default as ButtonFull } from "../components/ButtonFull";
+import Group from "../components/Group";
+import ButtonFull from "../components/ButtonFull";
 
 const About = () => {
   const navigate = useNavigate();

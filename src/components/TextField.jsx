@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 
-import { default as Null } from "./Null";
+import Null from "./Null";
 
 const TextField = ({
   name,

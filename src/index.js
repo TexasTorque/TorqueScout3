@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.css";
 
-import { default as Home } from "./pages/Home";
-import { default as Login } from "./pages/Login";
-import { default as NotFound } from "./pages/NotFound";
-import { default as Scout } from "./pages/Scout";
-import { default as About } from "./pages/About";
-import { default as Analysis } from "./pages/Analysis";
-import { default as Team } from "./pages/Team";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
+import Scout from "./pages/Scout";
+import About from "./pages/About";
+import Analysis from "./pages/Analysis";
+import Team from "./pages/Team";
 
 ReactDOM.render(
   <Router>

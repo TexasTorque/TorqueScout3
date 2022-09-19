@@ -10,9 +10,9 @@ import Col from "react-bootstrap/Col";
 
 import Card from "react-bootstrap/Card";
 
-import { default as Null } from "./Null";
-import { default as Group } from "./Group";
-import { default as Toggle } from "./Toggle";
+import Null from "./Null";
+import Group from "./Group";
+import Toggle from "./Toggle";
 
 const MutuallyExclusive = ({ elements, callback }) => {
   const [selected, setSelected] = useState(elements[0]);

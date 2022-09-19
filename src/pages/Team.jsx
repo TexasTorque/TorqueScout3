@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { getMatchesPerTeam } from "../firebase";
-import { default as Group } from "../components/Group";
+import Group from "../components/Group";
 import Table, { makeColumn } from "../components/Table";
 
 const Team = () => {

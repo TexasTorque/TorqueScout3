@@ -3,10 +3,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword } from "../firebase";
 
-import { default as ButtonFull } from "../components/ButtonFull";
-import { default as Group } from "../components/Group";
-import { default as Loader } from "../components/Loader";
-import { default as TextField } from "../components/TextField";
+import ButtonFull from "../components/ButtonFull";
+import Group from "../components/Group";
+import Loader from "../components/Loader";
+import TextField from "../components/TextField";
 
 const Login = () => {
   const [id, setID] = useState("");
