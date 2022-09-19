@@ -22,9 +22,14 @@ const Scout = () => {
   useEffect(() => {
     if (loading) return <Loader />;
     if (!user) return navigate("/login/scout");
-    getUserFromID(user.email.split("@")[0]).then(user =>
+    getUserFromID(user.email.split("@")[0]).then(user => {
+      if (user == null) {
+        alert("User was can not be found (was probably deleted).");
+        logout();
+        return navigate("login/scout");
+      }
       setName(user["first"])
-    );
+    });
   }, [user, loading]);
 
   const [report, setReport] = useState({});

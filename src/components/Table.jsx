@@ -34,9 +34,13 @@ const Table = ({ json, columns, defaultSortField }) => {
   useEffect(() => {
     if (loading) return <Loader />;
     if (!user) return navigate("/login/analysis");
-    // getUserFromID(user.email.split("@")[0]).then((user) =>
-    //   setName(user["first"])
-    // );
+    getUserFromID(user.email.split("@")[0]).then(user => {
+      if (user == null) {
+        alert("User was can not be found (was probably deleted).");
+        logout();
+        return navigate("login/scout");
+      }
+    }); 
   }, [user, loading]);
 
   const handleSort = (field) => {

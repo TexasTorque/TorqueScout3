@@ -21,8 +21,9 @@ const Home = () => {
         <Group name="Torque Scout 3">
           <ButtonFull name="Scout" callback={() => navigate("/scout")} />
           <ButtonFull name="Analysis" callback={() => navigate("/analysis")} />
-          <ButtonFull name="Login" callback={() => navigate("/login/index")} />
-          <ButtonFull name="Logout" callback={() => logout()} />
+          {/* <ButtonFull name="Login" callback={() => navigate("/login/index")} /> */}
+          {/* <ButtonFull name="Logout" callback={() => logout()} /> */}
+          <ButtonFull name="Admin" callback={() => navigate("/admin")} />
           <ButtonFull name="About" callback={() => navigate("/about")} />
           <ButtonFull
             name="Feedback"

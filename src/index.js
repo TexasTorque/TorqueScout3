@@ -10,11 +10,13 @@ import Scout from "./pages/Scout";
 import About from "./pages/About";
 import Analysis from "./pages/Analysis";
 import Team from "./pages/Team";
+import Admin from "./pages/Admin";
 
 ReactDOM.render(
   <Router>
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/admin" element={<Admin />} />
       <Route path="/index" element={<Home />} />
       <Route path="/login/:redirect" element={<Login />} />
       <Route path="/scout" element={<Scout />} />
