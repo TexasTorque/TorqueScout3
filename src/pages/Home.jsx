@@ -17,10 +17,15 @@ const Home = () => {
     <div className="home">
       <div className="container mt-4">
         <Group name="Torque Scout 3">
-          <ButtonFull name="Scout" callback={() => navigate('/scout')} />
-          <ButtonFull name="Analysis" callback={() => navigate('/analysis')} />
-          <ButtonFull name="About" callback={() => navigate('/about')} />
-          <ButtonFull name="Feedback" callback={() => window.location = 'https://forms.gle/xFdfs48ZrCWbjxhdA'} />
+          <ButtonFull name="Scout" callback={() => navigate("/scout")} />
+          <ButtonFull name="Analysis" callback={() => navigate("/analysis")} />
+          <ButtonFull name="About" callback={() => navigate("/about")} />
+          <ButtonFull
+            name="Feedback"
+            callback={() =>
+              (window.location = "https://forms.gle/xFdfs48ZrCWbjxhdA")
+            }
+          />
         </Group>
       </div>
     </div>

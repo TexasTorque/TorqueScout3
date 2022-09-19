@@ -22,8 +22,9 @@ const Scout = () => {
   useEffect(() => {
     if (loading) return <Loader />;
     if (!user) return navigate("/login");
-    getUserFromID(user.email.split("@")[0]).then((user) => setName(user['first']));
-
+    getUserFromID(user.email.split("@")[0]).then((user) =>
+      setName(user["first"])
+    );
   }, [user, loading]);
 
   const [report, setReport] = useState({});
@@ -68,28 +69,37 @@ const Scout = () => {
 
     submitReport(report);
 
-    navigate('/login');
+    navigate("/login");
   };
 
   const confirmExit = (callback) => {
     return () => {
-      if (window.confirm("Are you sure you want to leave?"))
-        callback();
+      if (window.confirm("Are you sure you want to leave?")) callback();
     };
-  }
+  };
 
   return (
     <div className="scout">
       <div className="container mt-4">
         <Group name="Scouting">
-          <TextField name="Scouter" callback={_ => _} readonly={name ?? ""} />
-          <ButtonFull name="Exit" callback={confirmExit(() => navigate('/'))} />
+          <TextField name="Scouter" callback={(_) => _} readonly={name ?? ""} />
+          <ButtonFull name="Exit" callback={confirmExit(() => navigate("/"))} />
           <ButtonFull name="Logout" callback={confirmExit(() => logout())} />
           <ButtonFull name="Submit" callback={() => submit()} />
         </Group>
         <Group name="Info">
-          <TextField name="Match" callback={hook("info.match", null)} type="number" inputMode="decimal"/>
-          <TextField name="Team" callback={hook("info.team", null)} type="number" inputMode="decimal"/>
+          <TextField
+            name="Match"
+            callback={hook("info.match", null)}
+            type="number"
+            inputMode="decimal"
+          />
+          <TextField
+            name="Team"
+            callback={hook("info.team", null)}
+            type="number"
+            inputMode="decimal"
+          />
           <Toggle
             name="Alliance"
             on="primary"
@@ -108,7 +118,7 @@ const Scout = () => {
           <Numeric name="Missed" min={0} callback={hook("teleop.missed")} />
         </Group>
         <Group name="Climb">
-          <Stopwatch name="Climb" callback={hook("climb.time")}/>
+          <Stopwatch name="Climb" callback={hook("climb.time")} />
           <MutuallyExclusive
             elements={["None", "Low", "Mid", "High", "Traverse"]}
             callback={hook("climb.level", "None")}

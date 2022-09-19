@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { getMatchesPerTeam } from "../firebase";
 import { default as Group } from "../components/Group";
-import Table from "../components/Table";
+import Table, { makeColumn } from "../components/Table";
 
 const Team = () => {
   const navigate = useNavigate();
@@ -14,16 +14,29 @@ const Team = () => {
   const [teamData, setTeamData] = useState(null);
 
   useEffect(() => {
-    getMatchesPerTeam(team).then(data => setTeamData(data));
+    getMatchesPerTeam(team).then((data) => setTeamData(data));
   }, [team]);
+
+  const columns = [
+    makeColumn("Match", "info.match"),
+    makeColumn("Auto Taxi", "auto.taxi", false),
+    makeColumn("Auto Lower", "auto.low"),
+    makeColumn("Auto Upper", "auto.upper"),
+    makeColumn("Auto Missed", "auto.missed"),
+    makeColumn("Teleop Lower", "teleop.low"),
+    makeColumn("Teleop Upper", "teleop.upper"),
+    makeColumn("Teleop Missed", "teleop.missed"),
+    makeColumn("Climb Level", "climb.level", false),
+    makeColumn("Climb Time", "climb.time"),
+    makeColumn("Scouter", "meta.username", false),
+  ];
 
   return (
     <div className="home">
-      <div className="container mt-4">
+      <div className="mt-4">
         <Group name={"Matches for " + team}>
-          <div className="table_container">
-            <Table json={teamData}/>
-            <button className="btn btn-primary" onClick={() => navigate("/")}> Back </button>
+          <div className="table-container">
+            <Table json={teamData} columns={columns} />
           </div>
         </Group>
       </div>

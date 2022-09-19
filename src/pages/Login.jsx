@@ -22,18 +22,22 @@ const Login = () => {
   }, [user, loading]);
 
   const login = () => {
-    const email = id + '@scout.texastorque.org';
+    const email = id + "@scout.texastorque.org";
     logInWithEmailAndPassword(email, password);
-    navigate('/scout');
-  }
+    navigate("/scout");
+  };
 
   return (
     <div className="login">
       <div className="container mt-4">
         <Group name="Login">
-          <ButtonFull name="Back to home" callback={() => navigate('/')} />
-          <TextField name="Username" callback={e => setID(e)} />
-          <TextField name="Password" callback={e => setPassword(e)} type="password" />
+          <ButtonFull name="Back to home" callback={() => navigate("/")} />
+          <TextField name="Username" callback={(e) => setID(e)} />
+          <TextField
+            name="Password"
+            callback={(e) => setPassword(e)}
+            type="password"
+          />
           <ButtonFull name="Login" callback={() => login()} />
         </Group>
       </div>

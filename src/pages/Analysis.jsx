@@ -20,10 +20,18 @@ const Analysis = () => {
     <div className="home">
       <div className="container mt-4">
         <Group name="Analysis">
-          <ButtonFull name="Back to home" callback={() => navigate('/')} />
-          <ButtonFull name="View averages" callback={() => navigate('/avgs')} />
-          <TextField name="Team" callback={v => setTeam(v)} type="number" inputMode="decimal"/>
-          <ButtonFull name="View by team" callback={() => navigate('/team/' + team)} />
+          <ButtonFull name="Back to home" callback={() => navigate("/")} />
+          <ButtonFull name="View averages" callback={() => navigate("/avgs")} />
+          <TextField
+            name="Team"
+            callback={(v) => setTeam(v)}
+            type="number"
+            inputMode="decimal"
+          />
+          <ButtonFull
+            name="View by team"
+            callback={() => navigate("/team/" + team)}
+          />
         </Group>
       </div>
     </div>
