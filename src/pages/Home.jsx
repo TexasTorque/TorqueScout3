@@ -11,6 +11,8 @@ import MutuallyExclusive from "../components/MutuallyExclusive";
 import ButtonHalf from "../components/ButtonHalf";
 import ButtonFull from "../components/ButtonFull";
 
+import {logout} from "../firebase";
+
 const Home = () => {
   const navigate = useNavigate();
   return (
@@ -19,6 +21,8 @@ const Home = () => {
         <Group name="Torque Scout 3">
           <ButtonFull name="Scout" callback={() => navigate("/scout")} />
           <ButtonFull name="Analysis" callback={() => navigate("/analysis")} />
+          <ButtonFull name="Login" callback={() => navigate("/login/index")} />
+          <ButtonFull name="Logout" callback={() => logout()} />
           <ButtonFull name="About" callback={() => navigate("/about")} />
           <ButtonFull
             name="Feedback"

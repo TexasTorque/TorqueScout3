@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword } from "../firebase";
 
 import ButtonFull from "../components/ButtonFull";
@@ -8,10 +8,7 @@ import Group from "../components/Group";
 import Loader from "../components/Loader";
 import TextField from "../components/TextField";
 
-
-const Login = ({}) => {
-  const { redirect } = useParams();
-
+const Admin = () => {
   const [id, setID] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
@@ -21,13 +18,13 @@ const Login = ({}) => {
     if (loading) {
       return <Loader />;
     }
-    if (user) navigate("/" + redirect ?? "/");
+    if (user) navigate("/scout");
   }, [user, loading]);
 
   const login = () => {
     const email = id + "@scout.texastorque.org";
     logInWithEmailAndPassword(email, password);
-    navigate("/login/" + redirect ?? "/");
+    navigate("/scout");
   };
 
   return (
@@ -38,7 +35,7 @@ const Login = ({}) => {
           <TextField name="Username" callback={(e) => setID(e)} />
           <TextField
             name="Password"
-            callback={(e) => setPassword(e)}
+            callback={e => setPassword(e)}
             type="password"
           />
           <ButtonFull name="Login" callback={() => login()} />

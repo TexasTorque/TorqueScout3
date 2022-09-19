@@ -21,8 +21,8 @@ const Scout = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) return <Loader />;
-    if (!user) return navigate("/login");
-    getUserFromID(user.email.split("@")[0]).then((user) =>
+    if (!user) return navigate("/login/scout");
+    getUserFromID(user.email.split("@")[0]).then(user =>
       setName(user["first"])
     );
   }, [user, loading]);
@@ -69,7 +69,7 @@ const Scout = () => {
 
     submitReport(report);
 
-    navigate("/login");
+    navigate("/login/scout");
   };
 
   const confirmExit = (callback) => {

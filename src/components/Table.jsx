@@ -33,7 +33,7 @@ const Table = ({ json, columns, defaultSortField }) => {
 
   useEffect(() => {
     if (loading) return <Loader />;
-    if (!user) return navigate("/login");
+    if (!user) return navigate("/login/analysis");
     // getUserFromID(user.email.split("@")[0]).then((user) =>
     //   setName(user["first"])
     // );
