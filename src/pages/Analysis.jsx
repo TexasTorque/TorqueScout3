@@ -21,7 +21,7 @@ const Analysis = () => {
       <div className="container mt-4">
         <Group name="Analysis">
           <ButtonFull name="Back to home" callback={() => navigate("/")} />
-          <ButtonFull name="View averages" callback={() => navigate("/avgs")} />
+          <ButtonFull name="View averages" callback={() => navigate("/averages")} />
           <TextField
             name="Team"
             callback={(v) => setTeam(v)}

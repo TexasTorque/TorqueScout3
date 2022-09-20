@@ -56,12 +56,7 @@ export const logout = () => {
 export const submitReport = async (report) => {
   const team = "team-" + report["info.team"];
   const match = "match-" + report["info.match"];
-  await setDoc(doc(db, match, team), report);
   await setDoc(doc(db, team, match), report);
-  await setDoc(doc(db, "meta", "team-dir"), {
-    team: report["info.team"],
-    match: report["info.match"],
-  });
 };
 
 export const getUserFromID = async (id) => {

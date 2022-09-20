@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { auth, db, logout, submitReport, getUserFromID } from "../firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
-import Card from "react-bootstrap/Card";
+import { auth, logout, submitReport, getUserFromID } from "../firebase";
 
 import Loader from "../components/Loader";
 import Numeric from "../components/Numeric";
@@ -11,12 +9,11 @@ import Group from "../components/Group";
 import Toggle from "../components/Toggle";
 import TextField from "../components/TextField";
 import MutuallyExclusive from "../components/MutuallyExclusive";
-import ButtonHalf from "../components/ButtonHalf";
 import ButtonFull from "../components/ButtonFull";
 import Stopwatch from "../components/Stopwatch";
 
 const Scout = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [name, setName] = useState("");
   const navigate = useNavigate();
   useEffect(() => {

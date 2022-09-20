@@ -45,8 +45,7 @@ const Team = () => {
         "teleop.defense": row["teleop.defense"] ? "Yes" : "No",
         "teleop.broken": row["teleop.broken"] ? "Yes" : "No",
         "teleop.score": teleopScore,
-        // "climb.score": climbLevels[row["climb.level"] ?? "None"],
-        // "total.score": row["auto.score"] + row["teleop.score"] + row["climb.score"],
+        "climb.score": climbLevels[row["climb.level"] ?? "None"],
         "total.score": totalScore,
       };
     });
@@ -76,6 +75,7 @@ const Team = () => {
     
     makeColumn("Climb Level", "climb.level", false),
     makeColumn("Climb Time", "climb.time"),
+    makeColumn("Climb Score", "climb.score"),
 
     makeColumn("Defense", "teleop.defense", false),
     makeColumn("Broken", "teleop.broken", false),
@@ -87,7 +87,7 @@ const Team = () => {
     <div className="home">
       <div className="mt-4" style={{width: "100rem"}}>
         <Group name={"Data for Team " + team} style={{width: "100%"}}>
-          <ButtonFull name="Back to analysis" callback={() => navigate("/analysis")} />
+          <ButtonFull name="Back to Analysis" callback={() => navigate("/analysis")} />
           <br></br>
           <div className="table-container">
             <Table json={teamData} columns={columns} defaultSortField="total.score"/>
