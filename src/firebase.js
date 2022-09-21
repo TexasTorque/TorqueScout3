@@ -13,6 +13,8 @@ import {
   collection,
   where,
   addDoc,
+  updateDoc,
+  setData,
 } from "firebase/firestore";
 import {
   getDatabase,
@@ -54,9 +56,32 @@ export const logout = () => {
 };
 
 export const submitReport = async (report) => {
-  const team = "team-" + report["info.team"];
+  const teamNum = report["info.team"];
+  const team = "team-" + teamNum;
   const match = "match-" + report["info.match"];
   await setDoc(doc(db, team, match), report);
+  //add updating averages list
+  const colRef = collection(db, "averages");
+  getDocs(colRef).then((querySnapshot) => {
+    if (querySnapshot.docs[0].data()[teamNum] === undefined) {
+      const template = {
+        totalMatches: 0,
+        averageData: {
+          totalScore: 0,
+          totalClimbTime: 0
+        }
+      }
+      /* querySnapshot.docs[0].data()[teamNum] = template; 
+          doc.push(querySnapshot);
+      */
+    } 
+    const teamDoc = querySnapshot.docs[0].data()[teamNum];
+      //update teamDoc
+      updateDoc(teamDoc, {
+          // matches += 1
+      })
+  });
+
 };
 
 export const getUserFromID = async (id) => {
@@ -70,6 +95,23 @@ export const getMatchesPerTeam = async (team) => {
   docs.forEach((doc) => matches.push(doc.data()));
   return matches;
 };
+
+export const getAverages = async () => {
+  /*
+  const avgDoc = await getDoc(doc(db, "averages", "average"));
+  for (team in avgDoc)
+    for ((key, stat) in team["averageData"])
+      averages[key] = stat / team["totalMatches"];
+  */
+
+  /*
+  const colRef = collection(db, "averages");
+  getDocs(colRef).then((querySnapshot) => {
+    querySnapshot.docs.forEach((doc) => {
+      return ({...doc.data()});
+    });
+  });*/
+}
 
 export const registerWithEmailAndPassword = async (email, password) => {
   try {
