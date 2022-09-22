@@ -63,23 +63,28 @@ export const submitReport = async (report) => {
   //add updating averages list
   const colRef = collection(db, "averages");
   getDocs(colRef).then((querySnapshot) => {
-    if (querySnapshot.docs[0].data()[teamNum] === undefined) {
-      const template = {
-        totalMatches: 0,
+    console.log(report);
+    let avgDoc = querySnapshot.docs[0];
+    if (avgDoc.data()[teamNum] === undefined) {
+      updateDoc( doc(db, "averages", avgDoc.id), {
+        [teamNum]: {
+          totalMatches: 0,
+          averageData: {
+            totalScore: 0,
+            totalClimbTime: 0
+          }
+        }
+      }).then(console.log(`Created new team field with number ${teamNum}`));
+    } 
+    updateDoc( doc(db, "averages", avgDoc.id), {
+      [teamNum]: {
+        totalMatches: avgDoc.data()[teamNum].totalMatches + 1,
         averageData: {
-          totalScore: 0,
-          totalClimbTime: 0
+          //totalScore: avgDoc.data()[teamNum].averageData.totalScore + report["total.score"],
+          totalClimbTime: avgDoc.data()[teamNum].averageData.totalClimbTime + report["climb.time"]
         }
       }
-      /* querySnapshot.docs[0].data()[teamNum] = template; 
-          doc.push(querySnapshot);
-      */
-    } 
-    const teamDoc = querySnapshot.docs[0].data()[teamNum];
-      //update teamDoc
-      updateDoc(teamDoc, {
-          // matches += 1
-      })
+    });
   });
 
 };
