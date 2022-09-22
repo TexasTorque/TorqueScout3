@@ -1,31 +1,16 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut
 } from "firebase/auth";
 import {
   getFirestore,
-  query,
   getDocs,
   collection,
-  where,
-  addDoc,
   updateDoc,
-  setData,
 } from "firebase/firestore";
-import {
-  getDatabase,
-  ref,
-  set,
-  child,
-  update,
-  remove,
-  onValue,
-} from "firebase/database";
-// import { getAuth as getAdminAuth } from "firebase-admin/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
 // This is secret
@@ -63,7 +48,6 @@ export const submitReport = async (report) => {
   //add updating averages list
   const colRef = collection(db, "averages");
   getDocs(colRef).then((querySnapshot) => {
-    console.log(report);
     let avgDoc = querySnapshot.docs[0];
     if (avgDoc.data()[teamNum] === undefined) {
       updateDoc( doc(db, "averages", avgDoc.id), {
@@ -71,23 +55,54 @@ export const submitReport = async (report) => {
           totalMatches: 0,
           averageData: {
             totalScore: 0,
-            totalClimbTime: 0
+            totalAutoLow: 0,
+            totalAutoUpper: 0,
+            totalAutoMissed: 0,
+            totalAutoScore: 0,
+            totalAutoAccuracy: 0,
+            totalTeleopLow: 0,
+            totalTeleopUpper: 0,
+            totalTeleopMissed: 0,
+            totalTeleopScore: 0,
+            totalTeleopAccuracy: 0,
+            totalClimbTime: 0,
+            totalClimbScore: 0,
           }
         }
-      }).then(console.log(`Created new team field with number ${teamNum}`));
-    } 
-    updateDoc( doc(db, "averages", avgDoc.id), {
+      }).then(() => {
+        updateAverages(teamNum, report)
+      }); 
+    } else {
+      updateAverages(teamNum, report);
+    }
+  });
+};
+
+const updateAverages = async (teamNum, report) => {
+  getDocs(collection(db, "averages")).then((querySnapshot) => {
+    let docx = querySnapshot.docs[0];
+    updateDoc( doc(db, "averages", docx.id), {
       [teamNum]: {
-        totalMatches: avgDoc.data()[teamNum].totalMatches + 1,
+        totalMatches: docx.data()[teamNum].totalMatches + 1,
         averageData: {
-          //totalScore: avgDoc.data()[teamNum].averageData.totalScore + report["total.score"],
-          totalClimbTime: avgDoc.data()[teamNum].averageData.totalClimbTime + report["climb.time"]
+          totalScore: docx.data()[teamNum].averageData.totalScore + report["total.score"],
+          totalAutoLower: docx.data()[teamNum].averageData.totalAutoLow + report["auto.low"],
+          totalAutoUpper: docx.data()[teamNum].averageData.totalAutoUpper + report["auto.upper"],
+          totalAutoMissed: docx.data()[teamNum].averageData.totalAutoMissed + report["auto.missed"],
+          totalAutoScore: docx.data()[teamNum].averageData.totalAutoScore + report["auto.score"],
+          totalAutoAccuracy: docx.data()[teamNum].averageData.totalAutoAccuracy + parseFloat(report["auto.accuracy"]),
+          totalTeleopLower: docx.data()[teamNum].averageData.totalTeleopLow + report["teleop.low"],
+          totalTeleopUpper: docx.data()[teamNum].averageData.totalTeleopUpper + report["teleop.upper"],
+          totalTeleopMissed: docx.data()[teamNum].averageData.totalTeleopMissed + report["teleop.missed"],
+          totalTeleopScore: docx.data()[teamNum].averageData.totalTeleopScore + report["teleop.score"],
+          totalTeleopAccuracy: docx.data()[teamNum].averageData.totalTeleopAccuracy + parseFloat(report["teleop.accuracy"]),
+          totalClimbTime: docx.data()[teamNum].averageData.totalClimbTime + report["climb.time"],
+          totalClimbScore: docx.data()[teamNum].averageData.totalClimbScore + report["climb.score"],
         }
       }
     });
   });
-
-};
+}
 
 export const getUserFromID = async (id) => {
   const user = await getDoc(doc(db, "users", id));
@@ -131,7 +146,6 @@ export const registerWithEmailAndPassword = async (email, password) => {
 
 export const createUser = async (first, last, password, admin) => {
   const id = (last.substring(0, 5) + first.substring(0, 3)).toLowerCase();
-  console.log(id);
   const email = id + "@torquescout.com";
   const uid = registerWithEmailAndPassword(email, password);
   setDoc(doc(db, "users", id), {

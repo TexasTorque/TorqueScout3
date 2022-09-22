@@ -31,6 +31,8 @@ const Scout = () => {
 
   const [report, setReport] = useState({});
   const map = {};
+  const climbScores = [0, 4, 6, 10, 15];
+  const climbLevs = ["None", "Low", "Mid", "High", "Traverse"];
 
   const hook = (field, def = 0) => {
     map[field] = def;
@@ -67,6 +69,13 @@ const Scout = () => {
     local = report;
     local["meta.username"] = name;
     local["meta.timestamp"] = new Date().getTime();
+    local["auto.score"] = (local["auto.low"]  * 2) + (local["auto.upper"] * 4);
+    local["auto.accuracy"] = (local["auto.low"] + local["auto.upper"]) > 0 ? Number(((local["auto.low"] + local["auto.upper"]) / (local["auto.low"] + local["auto.upper"] + local["auto.missed"]))).toFixed(2) : 0;
+    local["teleop.score"] = (local["teleop.low"]  * 1) + (local["teleop.upper"] * 2);
+    local["teleop.accuracy"] = (local["teleop.low"] + local["teleop.upper"]) > 0 ? Number(((local["teleop.low"] + local["teleop.upper"]) / (local["teleop.low"] + local["teleop.upper"] + local["teleop.missed"]))).toFixed(2) : 0;
+    local["climb.score"] = climbScores[climbLevs.indexOf(local["climb.level"])];
+    local["total.score"] = local["auto.score"] + local["teleop.score"] + local["climb.score"] + (local["autoTaxi"] ? 2 : 0);
+  
     setReport(local);
 
     submitReport(report);
@@ -124,7 +133,7 @@ const Scout = () => {
         <Group name="Climb">
           <Stopwatch name="Climb" callback={hook("climb.time")} />
           <MutuallyExclusive
-            elements={["None", "Low", "Mid", "High", "Traverse"]}
+            elements={climbLevs}
             callback={hook("climb.level", "None")}
           />
         </Group>
