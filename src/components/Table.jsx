@@ -81,9 +81,22 @@ const Table = ({ json, columns, defaultSortField }) => {
             {data.map(row => (
               <tr>
                 {columns.map(({ accessor }) => {
+                  if(accessor === "teamName") {
+                    return (
+                      <td>
+                        <Button
+                          variant="link"
+                          style={{ color: "blue" }}
+                          onClick={() => navigate(`/team/${row["teamName"]}`)}
+                        >
+                          {row[accessor]}
+                        </Button>
+                      </td>
+                    );
+                  } else {
                   const cell = row[accessor];
                   return <td>{cell == null ? "N/A" : cell}</td>;
-                })}
+                }})}
               </tr>
             ))}
           </tbody>
