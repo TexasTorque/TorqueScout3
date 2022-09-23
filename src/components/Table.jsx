@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { query, collection, getDocs, where } from "firebase/firestore";
-import { auth, db, logout, submitReport, getUserFromID } from "../firebase";
+import { auth, logout, getUserFromID } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -29,7 +28,7 @@ const Table = ({ json, columns, defaultSortField }) => {
 
   useEffect(() => setData(json), [json, data]);
 
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
     if (loading) return <Loader />;
@@ -52,7 +51,6 @@ const Table = ({ json, columns, defaultSortField }) => {
       if (a[field] < b[field]) return 1;
       if (a[field] > b[field]) return -1;
       return 0;
-      // return a[field].localeCompare(b[field]);
     });
 
     setData(sorted);
@@ -64,7 +62,6 @@ const Table = ({ json, columns, defaultSortField }) => {
         <thead className="tbl">
           <tr>
             {columns.map(({ label, accessor, sortable }) => (
-              // <th key={accessor}>
               <th>
                 { sortable ? (
                   <Button

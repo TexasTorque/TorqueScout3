@@ -17,7 +17,7 @@ ReactDOM.render(
   <Router>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/admin" element={<Admin />} />
+      {/*<Route path="/admin" element={<Admin />} />*/}
       <Route path="/index" element={<Home />} />
       <Route path="/login/:redirect" element={<Login />} />
       <Route path="/scout" element={<Scout />} />

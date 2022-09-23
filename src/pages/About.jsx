@@ -27,9 +27,6 @@ const About = () => {
               <li>
                 <a href="https://github.com/Suhas44">Suhas Guddeti</a>
               </li>
-              <li>
-                <a href="https://github.com/realSaddy">Jack Pittenger</a>
-              </li>
             </ul>
           </p>
           {/* <ButtonFull name="View the code" callback={() => window.location = 'https://github.com/texastorque/TorqueScout3'} /> */}

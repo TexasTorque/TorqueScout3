@@ -81,23 +81,25 @@ export const submitReport = async (report) => {
 const updateAverages = async (teamNum, report) => {
   getDocs(collection(db, "averages")).then((querySnapshot) => {
     let docx = querySnapshot.docs[0];
+    let scoreFields = docx.data()[teamNum].averageData;
     updateDoc( doc(db, "averages", docx.id), {
       [teamNum]: {
+        teamName: teamNum,
         totalMatches: docx.data()[teamNum].totalMatches + 1,
         averageData: {
-          totalScore: docx.data()[teamNum].averageData.totalScore + report["total.score"],
-          totalAutoLower: docx.data()[teamNum].averageData.totalAutoLow + report["auto.low"],
-          totalAutoUpper: docx.data()[teamNum].averageData.totalAutoUpper + report["auto.upper"],
-          totalAutoMissed: docx.data()[teamNum].averageData.totalAutoMissed + report["auto.missed"],
-          totalAutoScore: docx.data()[teamNum].averageData.totalAutoScore + report["auto.score"],
-          totalAutoAccuracy: docx.data()[teamNum].averageData.totalAutoAccuracy + parseFloat(report["auto.accuracy"]),
-          totalTeleopLower: docx.data()[teamNum].averageData.totalTeleopLow + report["teleop.low"],
-          totalTeleopUpper: docx.data()[teamNum].averageData.totalTeleopUpper + report["teleop.upper"],
-          totalTeleopMissed: docx.data()[teamNum].averageData.totalTeleopMissed + report["teleop.missed"],
-          totalTeleopScore: docx.data()[teamNum].averageData.totalTeleopScore + report["teleop.score"],
-          totalTeleopAccuracy: docx.data()[teamNum].averageData.totalTeleopAccuracy + parseFloat(report["teleop.accuracy"]),
-          totalClimbTime: docx.data()[teamNum].averageData.totalClimbTime + report["climb.time"],
-          totalClimbScore: docx.data()[teamNum].averageData.totalClimbScore + report["climb.score"],
+          totalScore: scoreFields.totalScore + report["total.score"],
+          totalAutoLow: scoreFields.totalAutoLow + report["auto.low"],
+          totalAutoUpper: scoreFields.totalAutoUpper + report["auto.upper"],
+          totalAutoMissed: scoreFields.totalAutoMissed + report["auto.missed"],
+          totalAutoScore: scoreFields.totalAutoScore + report["auto.score"],
+          totalAutoAccuracy: scoreFields.totalAutoAccuracy + parseFloat(report["auto.accuracy"]),
+          totalTeleopLow: scoreFields.totalTeleopLow + report["teleop.low"],
+          totalTeleopUpper: scoreFields.totalTeleopUpper + report["teleop.upper"],
+          totalTeleopMissed: scoreFields.totalTeleopMissed + report["teleop.missed"],
+          totalTeleopScore: scoreFields.totalTeleopScore + report["teleop.score"],
+          totalTeleopAccuracy: scoreFields.totalTeleopAccuracy + parseFloat(report["teleop.accuracy"]),
+          totalClimbTime: scoreFields.totalClimbTime + report["climb.time"],
+          totalClimbScore: scoreFields.totalClimbScore + report["climb.score"],
         }
       }
     });
@@ -117,20 +119,32 @@ export const getMatchesPerTeam = async (team) => {
 };
 
 export const getAverages = async () => {
-  /*
-  const avgDoc = await getDoc(doc(db, "averages", "average"));
-  for (team in avgDoc)
-    for ((key, stat) in team["averageData"])
-      averages[key] = stat / team["totalMatches"];
-  */
-
-  /*
-  const colRef = collection(db, "averages");
-  getDocs(colRef).then((querySnapshot) => {
-    querySnapshot.docs.forEach((doc) => {
-      return ({...doc.data()});
-    });
-  });*/
+  let averages = [];
+  const docs = await getDocs(collection(db, "averages"));
+  docs.forEach((doc) => averages.push(doc.data()));
+  for (let i = 0; i < averages.length; i++) {
+    for (let team in averages[i]) {
+      let totalMatches = averages[i][team].totalMatches;
+      let averageData = averages[i][team].averageData;
+      averages[i][team].averageData = {
+        teamName: team,
+        totalScore: parseFloat(Number(averageData.totalScore / totalMatches).toFixed(2)),
+        totalAutoLow: parseFloat(Number(averageData.totalAutoLow / totalMatches).toFixed(2)),
+        totalAutoUpper: parseFloat(Number(averageData.totalAutoUpper / totalMatches).toFixed(2)),
+        totalAutoMissed: parseFloat(Number(averageData.totalAutoMissed / totalMatches).toFixed(2)),
+        totalAutoScore: parseFloat(Number(averageData.totalAutoScore / totalMatches).toFixed(2)),
+        totalAutoAccuracy: parseFloat(Number(averageData.totalAutoAccuracy / totalMatches).toFixed(2)),
+        totalTeleopLow: parseFloat(Number(averageData.totalTeleopLow / totalMatches).toFixed(2)),
+        totalTeleopUpper: parseFloat(Number(averageData.totalTeleopUpper / totalMatches).toFixed(2)),
+        totalTeleopMissed: parseFloat(Number(averageData.totalTeleopMissed / totalMatches).toFixed(2)),
+        totalTeleopScore: parseFloat(Number(averageData.totalTeleopScore / totalMatches).toFixed(2)),
+        totalTeleopAccuracy: parseFloat(Number(averageData.totalTeleopAccuracy / totalMatches).toFixed(2)),
+        totalClimbTime: parseFloat(Number(averageData.totalClimbTime / totalMatches).toFixed(2)),
+        totalClimbScore: parseFloat(Number(averageData.totalClimbScore / totalMatches).toFixed(2)),
+      };
+    }
+  }
+  return averages;
 }
 
 export const registerWithEmailAndPassword = async (email, password) => {

@@ -19,6 +19,7 @@ const Team = () => {
   const [teamData, setTeamData] = useState(null);
 
   const processData = (data) => {
+    console.log(data);
     return data.map(row => {
 
       const autoLower = row["auto.low"] ?? 0;
@@ -35,8 +36,8 @@ const Team = () => {
       const teleopAccuracy = (teleopLower + teleopUpper) > 0 ? Number(((teleopLower + teleopUpper) / (teleopLower + teleopUpper + teleopMissed)).toFixed(2)) : 0;
       const climbScore =  climbLevels[row["climb.level"] ?? "None"];
       const totalScore = autoScore + teleopScore + climbScore;
-     
-      return {
+      
+      const toReturn = {
         ...row,
         "auto.taxi": row["auto.taxi"] ? "Yes" : "No",
         "auto.score": autoScore,
@@ -48,6 +49,9 @@ const Team = () => {
         "climb.score": climbLevels[row["climb.level"] ?? "None"],
         "total.score": totalScore,
       };
+
+      //console.log(toReturn);
+      return toReturn;
     });
   }
 
@@ -55,7 +59,7 @@ const Team = () => {
   useEffect(() => {
     getMatchesPerTeam(team).then((data) => setTeamData(processData(data)));
   }, [team]);
-
+  
   const columns = [
     makeColumn("Match", "info.match"),
     makeColumn("Total Score", "total.score"),
